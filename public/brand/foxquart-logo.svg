@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Foxquart">
+  <title>Foxquart</title>
+  <rect width="512" height="512" rx="118" fill="#1C1F26" />
+  <!--
+    Fox head "Q": two wide sharp ears meeting in a deep V at mid-face, cheeks
+    tapering to a pointed chin, circular counter low in the face. The tail is a
+    rotated rect straddling the circle edge - even-odd fill flips it orange
+    inside the counter and dark outside, forming the interlocked Q key.
+  -->
+  <path
+    fill="#FB4F02"
+    fill-rule="evenodd"
+    d="M104 88
+       C154 136 206 184 256 216
+       C306 184 358 134 408 86
+       C404 214 396 300 336 372
+       C310 402 282 426 256 431
+       C230 426 202 402 176 372
+       C116 300 108 214 104 88
+       Z
+       M256 266
+       a62 62 0 1 0 0.01 0
+       Z
+       M284 373 L301 356 L322 377 L305 394 Z"
+  />
+</svg>

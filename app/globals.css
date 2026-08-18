@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+/* next-themes writes .light / .dark onto <html>. Light is the default and the
+   design's primary state; dark is a faithful re-mapping, not an afterthought. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────── tokens ─────────────────────────
+   Palette: warm stone ground + deep ink-teal brand.
+   Deliberately not the medical-mint cliché, and not AI-purple.
+   Semantic colours are reserved and never used decoratively:
+     success = money received / in stock
+     warning = expiring soon / low stock
+     danger  = expired / out of stock
+   Brand is for navigation and primary actions only, so a green "PAID"
+   never competes with it for attention.
+   ───────────────────────────────────────────────────────── */
+
+:root {
+  /* ground */
+  --bg:              oklch(0.984 0.003 85);
+  --bg-sunken:       oklch(0.962 0.004 85);
+  --surface:         oklch(1 0 0);
+  --surface-raised:  oklch(1 0 0);
+  --surface-hover:   oklch(0.972 0.004 85);
+  --surface-active:  oklch(0.945 0.005 85);
+
+  /* lines */
+  --border:          oklch(0.912 0.005 85);
+  --border-strong:   oklch(0.845 0.006 85);
+  --border-focus:    oklch(0.48 0.09 205);
+
+  /* text */
+  --text:            oklch(0.215 0.008 75);
+  --text-secondary:  oklch(0.478 0.008 75);
+  --text-tertiary:   oklch(0.625 0.007 75);
+  --text-inverse:    oklch(0.99 0 0);
+
+  /* brand — deep ink teal */
+  --brand:           oklch(0.475 0.088 205);
+  --brand-hover:     oklch(0.415 0.092 205);
+  --brand-active:    oklch(0.365 0.09 205);
+  --brand-subtle:    oklch(0.955 0.021 205);
+  --brand-subtle-hover: oklch(0.928 0.032 205);
+  --brand-border:    oklch(0.875 0.042 205);
+  --brand-text:      oklch(0.40 0.09 205);
+  --on-brand:        oklch(0.99 0 0);
+
+  /* semantic — money in */
+  --success:         oklch(0.545 0.128 155);
+  --success-subtle:  oklch(0.955 0.032 155);
+  --success-border:  oklch(0.865 0.062 155);
+  --success-text:    oklch(0.435 0.115 155);
+  --on-success:      oklch(0.99 0 0);
+
+  /* semantic — expiring / low */
+  --warning:         oklch(0.735 0.145 68);
+  --warning-subtle:  oklch(0.965 0.038 78);
+  --warning-border:  oklch(0.885 0.075 75);
+  --warning-text:    oklch(0.505 0.115 62);
+  --on-warning:      oklch(0.20 0.02 70);
+
+  /* semantic — expired / out */
+  --danger:          oklch(0.555 0.192 27);
+  --danger-subtle:   oklch(0.962 0.028 25);
+  --danger-border:   oklch(0.878 0.062 25);
+  --danger-text:     oklch(0.485 0.185 27);
+  --on-danger:       oklch(0.99 0 0);
+
+  /* accent for informational chips (schedule badges etc.) */
+  --accent:          oklch(0.50 0.13 285);
+  --accent-subtle:   oklch(0.962 0.022 285);
+  --accent-border:   oklch(0.882 0.048 285);
+  --accent-text:     oklch(0.435 0.135 285);
+
+  /* Foxquart house brand. Scoped to attribution chrome only (logo lockup,
+     "built by" footer). Kept out of the product palette on purpose: Foxquart
+     orange sits in the same hue range as the `warning` token, and in a pharmacy
+     "expiring soon" must never be visually confusable with brand furniture. */
+  --foxquart:        oklch(0.645 0.222 38);
+  --foxquart-ink:    oklch(0.245 0.012 268);
+  --foxquart-subtle: oklch(0.962 0.028 42);
+
+  /* elevation — tinted to the ground hue, never pure black */
+  --shadow-xs: 0 1px 2px 0 oklch(0.22 0.01 75 / 0.05);
+  --shadow-sm: 0 1px 3px 0 oklch(0.22 0.01 75 / 0.07), 0 1px 2px -1px oklch(0.22 0.01 75 / 0.06);
+  --shadow-md: 0 4px 10px -2px oklch(0.22 0.01 75 / 0.08), 0 2px 4px -2px oklch(0.22 0.01 75 / 0.05);
+  --shadow-lg: 0 12px 28px -6px oklch(0.22 0.01 75 / 0.12), 0 4px 10px -4px oklch(0.22 0.01 75 / 0.06);
+  --shadow-xl: 0 24px 56px -12px oklch(0.22 0.01 75 / 0.17);
+
+  /* one radius system, applied everywhere */
+  --radius-sm: 0.375rem;
+  --radius:    0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+}
+
+.dark {
+  --bg:              oklch(0.168 0.006 250);
+  --bg-sunken:       oklch(0.138 0.006 250);
+  --surface:         oklch(0.208 0.007 250);
+  --surface-raised:  oklch(0.238 0.008 250);
+  --surface-hover:   oklch(0.252 0.008 250);
+  --surface-active:  oklch(0.285 0.009 250);
+
+  --border:          oklch(0.295 0.009 250);
+  --border-strong:   oklch(0.385 0.011 250);
+  --border-focus:    oklch(0.72 0.105 200);
+
+  --text:            oklch(0.955 0.004 250);
+  --text-secondary:  oklch(0.735 0.008 250);
+  --text-tertiary:   oklch(0.585 0.009 250);
+  --text-inverse:    oklch(0.16 0.006 250);
+
+  /* brand lifts in dark so it keeps the same visual weight against the ground */
+  --brand:           oklch(0.715 0.105 200);
+  --brand-hover:     oklch(0.775 0.098 200);
+  --brand-active:    oklch(0.825 0.088 200);
+  --brand-subtle:    oklch(0.278 0.038 205);
+  --brand-subtle-hover: oklch(0.318 0.048 205);
+  --brand-border:    oklch(0.395 0.058 205);
+  --brand-text:      oklch(0.795 0.095 200);
+  --on-brand:        oklch(0.15 0.02 205);
+
+  --success:         oklch(0.715 0.145 155);
+  --success-subtle:  oklch(0.268 0.048 155);
+  --success-border:  oklch(0.385 0.072 155);
+  --success-text:    oklch(0.795 0.135 155);
+  --on-success:      oklch(0.15 0.03 155);
+
+  --warning:         oklch(0.795 0.145 72);
+  --warning-subtle:  oklch(0.288 0.052 68);
+  --warning-border:  oklch(0.412 0.078 70);
+  --warning-text:    oklch(0.855 0.125 78);
+  --on-warning:      oklch(0.18 0.03 70);
+
+  --danger:          oklch(0.665 0.178 25);
+  --danger-subtle:   oklch(0.285 0.062 25);
+  --danger-border:   oklch(0.408 0.092 25);
+  --danger-text:     oklch(0.782 0.132 25);
+  --on-danger:       oklch(0.16 0.03 25);
+
+  --accent:          oklch(0.705 0.135 285);
+  --accent-subtle:   oklch(0.285 0.055 285);
+  --accent-border:   oklch(0.405 0.078 285);
+  --accent-text:     oklch(0.808 0.108 285);
+
+  --foxquart:        oklch(0.702 0.196 40);
+  --foxquart-ink:    oklch(0.928 0.006 268);
+  --foxquart-subtle: oklch(0.292 0.058 38);
+
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.28);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.36), 0 1px 2px -1px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 4px 10px -2px oklch(0 0 0 / 0.42), 0 2px 4px -2px oklch(0 0 0 / 0.32);
+  --shadow-lg: 0 12px 28px -6px oklch(0 0 0 / 0.5), 0 4px 10px -4px oklch(0 0 0 / 0.36);
+  --shadow-xl: 0 24px 56px -12px oklch(0 0 0 / 0.62);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-sunken: var(--bg-sunken);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-focus: var(--border-focus);
+
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-subtle-hover: var(--brand-subtle-hover);
+  --color-brand-border: var(--brand-border);
+  --color-brand-text: var(--brand-text);
+  --color-on-brand: var(--on-brand);
+
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+  --color-on-success: var(--on-success);
+
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-border: var(--warning-border);
+  --color-warning-text: var(--warning-text);
+  --color-on-warning: var(--on-warning);
+
+  --color-danger: var(--danger);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-border: var(--danger-border);
+  --color-danger-text: var(--danger-text);
+  --color-on-danger: var(--on-danger);
+
+  --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+  --color-accent-text: var(--accent-text);
+
+  --color-foxquart: var(--foxquart);
+  --color-foxquart-ink: var(--foxquart-ink);
+  --color-foxquart-subtle: var(--foxquart-subtle);
+
+  --font-sans: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  /* Numerals. Inter, for its genuinely tabular figures. */
+  --font-numeric: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Code-like content only: webhook payloads, signatures, raw URIs. */
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Motion. The app runs at MOTION 2 — feedback only, never decoration.
+     Curves are custom; browser defaults are not used anywhere. */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every number in this product is money, a quantity, a batch code, a time or
+     a date. All of them must align in columns and must not jitter as they
+     change. Lexend ships no tabular figures, so numerals take Inter, whose
+     `tnum` figures are genuinely tabular while still reading as ordinary text.
+     Monospace was doing the alignment job but made opening hours and phone
+     numbers look like terminal output. */
+  .numeric,
+  .tabular,
+  table td.numeric,
+  table th.numeric,
+  input[type="number"] {
+    font-family: var(--font-numeric);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum", "cv05";
+    letter-spacing: -0.006em;
+  }
+
+  /* Branded, theme-aware, and legible on both grounds. */
+  ::selection {
+    background-color: var(--brand-subtle-hover);
+    color: var(--brand-text);
+  }
+
+  /* One focus treatment for the whole product. Visible AND on-brand —
+     never removed, never swapped for a colour-only cue. */
+  :focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 3px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+}
+
+@layer utilities {
+  /* Hairline that survives both themes without going muddy. */
+  .rule { border-color: var(--border); }
+
+  /* Content-visibility guard for long virtualised-ish tables. */
+  .contain-rows { content-visibility: auto; contain-intrinsic-size: auto 3rem; }
+}
+
+/* Motion above MOTION_INTENSITY 3 must degrade. Feedback that conveys state
+   (colour, opacity) is kept; anything that travels is removed. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
